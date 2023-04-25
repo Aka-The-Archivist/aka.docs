@@ -40,8 +40,3 @@ The `cd` command changes the directory you're working with. In order to work wit
 you'll need to navigate the terminal there.
 
 The `npm run dev` command start a development server, ready for you to view at http://localhost:3000.
-
-## Video create app as services
-
-<iframe width="100%" height="580px" src="/video/aka-create-020917.mp4" frameborder="0" allowfullscreen></iframe>
-
