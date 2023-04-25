@@ -6,17 +6,17 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'Aka Backend Wiki', tagline: 'Express Fast Backend Framework', favicon: 'img/favicon.ico',
+    title: 'Aka Backend', tagline: 'Fast Express.js Backend Framework', favicon: 'img/favicon.ico',
 
     // Set the production url of your site here
     url: 'https://aka-the-archivist.github.io', // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: '/wiki.aka/',
+    baseUrl: '/aka.docs/',
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
     organizationName: 'Aka-The-Archivist', // Usually your GitHub org/user name.
-    projectName: 'wiki.aka', // Usually your repo name.
+    projectName: 'aka.docs', // Usually your repo name.
     trailingSlash: false,
 
     onBrokenLinks: 'throw', onBrokenMarkdownLinks: 'warn',
@@ -47,8 +47,8 @@ const config = {
         ({
             // Replace with your project's social card
             image: 'img/aka-image-card.png', navbar: {
-                title: 'Aka Backend Wiki', logo: {
-                    alt: 'Aka Backend Wiki Logo', src: 'img/logo.svg',
+                title: 'Aka Backend', logo: {
+                    alt: 'Aka Backend Logo', src: 'img/logo.svg',
                 }, items: [{
                     type: 'docSidebar', sidebarId: 'tutorialSidebar', position: 'left', label: 'Getting Started',
                 }, {to: '/blog', label: 'Blog', position: 'left'}, {
