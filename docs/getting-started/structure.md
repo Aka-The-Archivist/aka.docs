@@ -90,7 +90,7 @@ export default {
     resave: false, // don't save session if unmodified
 ```
 
-In the file, we have the configuration settings for the session middleware in Express. The
+In the file, we have the configuration settings for the session middleware in Aka. The
 express-session package is used to create a session middleware that persists session data between HTTP requests. This is
 done by generating a unique session ID for each user and storing it as a cookie in the user's browser.
 
@@ -117,13 +117,13 @@ export default {
      | helmet.js middleware
      |--------------------------------------------------------------------------
      |
-     | security middleware for Express.js that helps protect your web application
+     | security middleware that helps protect your web application
      | from several common attacks.
      */
     helmet: helmet()
 ```
 
-This file contains all the middleware functions for ExpressJS, the framework used by aka backend. These middleware
+This file contains all the middleware functions for Aka, the framework used by aka backend. These middleware
 functions are injected into your application in the order they are added to this file. You can add or remove middleware
 functions in this file to customize the behavior of your application.
 
@@ -136,7 +136,7 @@ application's behavior and ensure that it runs smoothly.
 
 The directory contains all the middleware functions that are loaded before any other middleware in the
 application. This means that all default middleware functions exported from the files in this directory will be injected
-into Express using the app.use() method, making it easier to manage custom middleware functions.
+into Aka using the app.use() method, making it easier to manage custom middleware functions.
 
 :::note
 It's worth noting that you can create subdirectories within the /middlewares directory to organize your middleware
@@ -155,14 +155,14 @@ export default (req, res, next) => {
 In the file there is an example of a global middleware that logs the requests.
 
 :::note
-This middleware function uses the express app.use() method to attach itself to every request before they are passed to
+This middleware function uses the aka app.use() method to attach itself to every request before they are passed to
 other middleware or routes. It logs the HTTP method, the URL, and the remote IP address of the incoming request.
 :::
 
 ## /public
 
 The folder contains all the files that are served by the server, such as CSS, images, videos, JavaScript, and
-other static assets. These files are served using the default middleware provided by Express, which can be configured in
+other static assets. These files are served using the default middleware provided by Aka, which can be configured in
 the use.js file located in the config folder.
 
 :::note
@@ -344,7 +344,7 @@ import config from "./config/app.js";
 
 /*
  |--------------------------------------------------------------------------
- | Start Express.js application
+ | Start [aka.backend] application
  |--------------------------------------------------------------------------
  */
 app.listen(config.port, () => {

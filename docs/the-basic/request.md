@@ -4,14 +4,14 @@ sidebar_position: 1
 
 # Requests
 
-The Requests page provides information on how the system handles HTTP requests using Express. Aka loads the
+The Requests page provides information on how the system handles HTTP requests using Aka. System loads the
 GET, POST, PATCH, and DELETE routes based on the default functions exported in the routing files.
 
 ## GET requests
 
-you can define a default function named "get" which is equal to a function (preferably an arrow function) that takes
+you can define a default function named "get" which is equal to a function that takes
 three
-parameters: the req object of Express.js, the res object, and an optional next function.
+parameters: the req object of request, the res object, and an optional next function.
 
 ```js title=/route/example.js
 export default function get(req, res) {
@@ -33,9 +33,9 @@ your requests.
 
 ## POST requests
 
-you can define a default function named "post" which is equal to a function (preferably an arrow function) that takes
+you can define a default function named "post" which is equal to a function that takes
 three
-parameters: the req object of Express.js, the res object, and an optional next function.
+parameters: the req object of request, the res object, and an optional next function.
 
 ```js title=/route/example.js
 export default function post(req, res) {
@@ -57,9 +57,9 @@ your requests.
 
 ## PARAMS requests
 
-you can define a default function named "get" which is equal to a function (preferably an arrow function) that takes
+you can define a default function named "get","post" or "all" which is equal to a function that takes
 three
-parameters: the req object of Express.js, the res object, and an optional next function.
+parameters: the req object of request, the res object, and an optional next function.
 
 ```js title=/route/[example].js
 export default function get(req, res) {
@@ -82,10 +82,9 @@ your requests.
 ## MULTIPLE requests
 
 :::important
-Each file that is placed in the routes folder can support multiple HTTP methods in the same file. This is possible by
-exporting multiple default functions that are functions with different method types (e.g. GET, POST, PUT, DELETE). These
-functions receive the Express request and response objects as arguments and can be named according to the desired route
-path. By using this approach, it is possible to define and manage all the routes for a specific resource in a single
+Each file that is placed in the routes folder can support multiple HTTP methods. This is possible by
+exporting default functions that are named  "all", equals (e.g. GET, POST, PUT, DELETE).
+By using this approach, it is possible to define and manage all the routes for a specific resource in a single
 file.
 :::
 
