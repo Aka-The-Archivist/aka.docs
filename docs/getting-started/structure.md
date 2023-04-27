@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
-# Directory Structure
+# Project Structure
 
 The default application structure is intended to provide a great starting point for both large and small
 applications. But you are free to organize your application however you like.
@@ -45,33 +45,6 @@ application to ensure consistency and easy maintenance. You can also use this fi
 libraries that your application needs to function properly. By keeping all the configuration settings in one place, you
 can easily manage and maintain your application's behavior and performance.
 
-### /config/middleware.js
-
-```js
-import helmet from "helmet";
-
-export default {
-
-    /**
-     |--------------------------------------------------------------------------
-     | helmet.js middleware
-     |--------------------------------------------------------------------------
-     |
-     | security middleware for Express.js that helps protect your web application
-     | from several common attacks.
-     */
-    helmet: helmet()
-```
-
-This file contains all the middleware functions for ExpressJS, the framework used by aka backend. These middleware
-functions are injected into your application in the order they are added to this file. You can add or remove middleware
-functions in this file to customize the behavior of your application.
-
-Middleware functions can be used to handle requests and responses, parse data, authenticate users, and perform other
-tasks that are necessary for your application
-to function properly. By keeping all the middleware functions in one file, you can easily manage and modify your
-application's behavior and ensure that it runs smoothly.
-
 ### /config/policy.js
 
 ```js
@@ -99,6 +72,113 @@ method, even if you have routes that are set up to handle POST requests. This ca
 for limiting the methods that are allowed for a particular endpoint._
 :::
 
+### /config/session.js
+
+```js
+export default {
+
+    /**
+     |--------------------------------------------------------------------------
+     | Application origin
+     |--------------------------------------------------------------------------
+     |
+     | This value is part of your application. This value is used when the framework
+     | needs to place this value in any other location as required
+     | by the application or its packages.
+     |
+     */
+    resave: false, // don't save session if unmodified
+```
+
+In the file, we have the configuration settings for the session middleware in Express. The
+express-session package is used to create a session middleware that persists session data between HTTP requests. This is
+done by generating a unique session ID for each user and storing it as a cookie in the user's browser.
+
+The configuration options include:
+
+- secret: a string used to sign the session ID cookie to prevent tampering
+- resave: a Boolean value that determines whether to save the session even if it was not modified during the request
+- saveUninitialized: a Boolean value that determines whether to create a new session if there is no active session for
+  the user
+- cookie: an object that defines the session cookie settings, such as the cookie name, expiration time, and secure flag.
+
+These settings can be customized to fit the specific needs of the application, such as setting a longer session timeout
+or a more secure cookie.
+
+### /config/use.js
+
+```js
+import helmet from "helmet";
+
+export default {
+
+    /**
+     |--------------------------------------------------------------------------
+     | helmet.js middleware
+     |--------------------------------------------------------------------------
+     |
+     | security middleware for Express.js that helps protect your web application
+     | from several common attacks.
+     */
+    helmet: helmet()
+```
+
+This file contains all the middleware functions for ExpressJS, the framework used by aka backend. These middleware
+functions are injected into your application in the order they are added to this file. You can add or remove middleware
+functions in this file to customize the behavior of your application.
+
+Middleware functions can be used to handle requests and responses, parse data, authenticate users, and perform other
+tasks that are necessary for your application
+to function properly. By keeping all the middleware functions in one file, you can easily manage and modify your
+application's behavior and ensure that it runs smoothly.
+
+## /middlewares
+
+The directory contains all the middleware functions that are loaded before any other middleware in the
+application. This means that all default middleware functions exported from the files in this directory will be injected
+into Express using the app.use() method, making it easier to manage custom middleware functions.
+
+:::note
+It's worth noting that you can create subdirectories within the /middlewares directory to organize your middleware
+functions even further.
+:::
+
+## /middlewares/index.js
+
+```js
+export default (req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+}
+```
+
+In the file there is an example of a global middleware that logs the requests.
+
+:::note
+This middleware function uses the express app.use() method to attach itself to every request before they are passed to
+other middleware or routes. It logs the HTTP method, the URL, and the remote IP address of the incoming request.
+:::
+
+## /public
+
+The folder contains all the files that are served by the server, such as CSS, images, videos, JavaScript, and
+other static assets. These files are served using the default middleware provided by Express, which can be configured in
+the use.js file located in the config folder.
+
+:::note
+By default, the static middleware is used to serve static files.
+:::
+
+## /public/social-cards.png
+
+Is an example file that can be found in the URL of the app, such as http://127.0.0.1:3000/social-cards.png. It is a file
+that is stored in the public directory and can be accessed by anyone who has the URL of the file.
+
+:::important
+However, you need to activate it by removing the comments, just like all the optional middlewares in the use.js file of
+the config.
+:::
+
 ## /routes
 
 This folder contains all the routes that will be loaded at the system level for your application. This folder contains
@@ -119,7 +199,7 @@ and retrieve the desired data.
  * @param req
  * @param res
  */
-export const get = (req, res) => {
+export const $get = (req, res) => {
         res.json({
             method: 'GET',
             message: 'Start from editing routes/index.js',
@@ -159,7 +239,7 @@ longer needed, all while maintaining a clear and organized structure for your ap
  * @param req
  * @param res
  */
-export const get = (req, res) => {
+export const $get = (req, res) => {
 
         const {id} = req.params; // get query params
 
@@ -190,16 +270,16 @@ appropriate parameter value.
  * @param req
  * @param res
  */
-export const post = (req, res) => {
+export const $post = (req, res) => {
 
-        const {...data} = req.body; // get post params
+          const {...data} = req.body; // get post params
 
-        res.json({
+          res.json({
             method: 'POST',
             data: data,
             message: 'Start from editing routes/hello/index.js',
-        })
-    }
+          })
+        }
 ```
 
 This file contains an example of a POST route, which demonstrates how to handle POST requests and process parameters
@@ -255,25 +335,30 @@ file is used to exclude temporary files, log files, local configuration files, a
 necessary for the operation of the project and that may change frequently during development. This way, you can keep
 your Git repository clean and organized.
 
-[//]: # (## Multi Functional Export Methods)
+## /index.js
 
-[//]: # ()
-[//]: # (>If you export multiple functions in the same file, each function can be accessed as a separate route and will respond to)
+```js
+import {app} from "aka.providers"; // must init before all
+import config from "./config/app.js";
 
-[//]: # (the appropriate HTTP method. For example, if you export a constant named "get", a function named "post", and another)
+/*
+ |--------------------------------------------------------------------------
+ | Start Express.js application
+ |--------------------------------------------------------------------------
+ */
+app.listen(config.port, () => {
+    console.log(`${config.name} backend listening on port http://127.0.0.1:${config.port}`)
+})
+```
 
-[//]: # (function named "delete" in the same file, that file will become a route in your application that can be accessed with)
+In the index.js file of your Aka backend project, you can find the code for starting the server. One important thing to
+note is that if you are using the aka.provider package to manage environment variables, you need to import it before any
+other package that may use those variables. This is to ensure that the environment variables are properly loaded before
+they are accessed by other packages.
 
-[//]: # (GET, POST, and DELETE requests.)
-
-[//]: # ()
-[//]: # (By exporting multiple functions in the same file, you can create more flexible and customizable routes that can handle a)
-
-[//]: # (variety of requests and inputs. This makes it easier to build robust and scalable applications that can handle different)
-
-[//]: # (types of data and operations.)
-
-[//]: # ()
-[//]: # (However, it's important to remember that each function exported in the same file must be named uniquely and respond to a)
-
-[//]: # (different HTTP method, otherwise it can result in errors or unexpected behavior in your application.)
+:::warning
+Additionally, aka.provider package uses the dotenv package to load environment variables from a .env file in your
+project's root directory. This file should not be committed to version control to prevent leaking sensitive information.
+Instead, you should provide a .env.example file that contains sample environment variable values for other developers to
+reference.
+:::

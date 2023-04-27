@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 10
 ---
 
-# Deployment on production
+# Deployment
 
 Deployment on production is a critical step in the development of any application, allowing you to make your application
 available to users and customers. In the context of aka backend framework, deployment on production involves preparing
