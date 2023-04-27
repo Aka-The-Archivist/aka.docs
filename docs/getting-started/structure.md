@@ -147,7 +147,7 @@ functions even further.
 
 ```js
 export default (req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
+    // console.log(`${req.method} ${req.url}`);
     next();
 }
 ```
@@ -199,12 +199,12 @@ and retrieve the desired data.
  * @param req
  * @param res
  */
-export const $get = (req, res) => {
-        res.json({
-            method: 'GET',
-            message: 'Start from editing routes/index.js',
-        })
-    }
+export default function get(req, res) {
+    res.json({
+        method: 'GET',
+        message: 'Start from editing routes/index.js',
+    })
+}
 ```
 
 This file contains the first route for your application, which is the root route ("/"). This file exports a constant
@@ -239,16 +239,16 @@ longer needed, all while maintaining a clear and organized structure for your ap
  * @param req
  * @param res
  */
-export const $get = (req, res) => {
+export default function all(req, res) {
 
-        const {id} = req.params; // get query params
+    const {id} = req.params; // get query params
 
-        res.json({
-            method: 'GET',
-            params: id,
-            message: 'Start from editing routes/hello/[id].js',
-        })
-    }
+    res.json({
+        method: req.method,
+        params: id,
+        message: 'Start from editing routes/hello/[id].js',
+    })
+}
 ```
 
 This file corresponds to a dynamic route, which means that it contains parameters that can be passed in as part of the
@@ -256,7 +256,8 @@ route. In this case, the parameter is "id", which is enclosed in square brackets
 route.
 
 :::info
-For example, if you have a file named "hello/[id].js" in this folder and you make a GET request to "/hello/params", the
+For example, if you have a file named "hello/[id].js" in this folder, and you make a GET,POST,PATCH,DELETE request to "
+/hello/params", the
 system will capture "params" as the value of the "id" parameter and execute the code inside the file with the
 appropriate parameter value.
 
@@ -270,16 +271,16 @@ appropriate parameter value.
  * @param req
  * @param res
  */
-export const $post = (req, res) => {
+export default function post(req, res) {
 
-          const {...data} = req.body; // get post params
+    const {...data} = req.body; // get post params
 
-          res.json({
-            method: 'POST',
-            data: data,
-            message: 'Start from editing routes/hello/index.js',
-          })
-        }
+    res.json({
+        method: 'POST',
+        data: data,
+        message: 'Start from editing routes/hello/index.js',
+    })
+}
 ```
 
 This file contains an example of a POST route, which demonstrates how to handle POST requests and process parameters
@@ -357,7 +358,7 @@ other package that may use those variables. This is to ensure that the environme
 they are accessed by other packages.
 
 :::warning
-Additionally, aka.provider package uses the dotenv package to load environment variables from a .env file in your
+Additionally, [aka.provider] package uses the dotenv package to load environment variables from a .env file in your
 project's root directory. This file should not be committed to version control to prevent leaking sensitive information.
 Instead, you should provide a .env.example file that contains sample environment variable values for other developers to
 reference.
