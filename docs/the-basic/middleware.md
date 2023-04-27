@@ -33,3 +33,15 @@ The middleware functions are executed in the order they are defined in the direc
 order of middleware functions, as the behavior of the entire application could be impacted by the order in which the
 middleware functions are defined.
 :::
+
+## Example routing middleware
+
+In this example we see how to add a middleware exclusively to a specific route. You can also use a wildcard to control
+access to the route.
+
+```js title=/middleware/example.js
+export default ['/example', (req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+}]
+```
