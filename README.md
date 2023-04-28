@@ -1,4 +1,4 @@
-### [aka.docs] Website for Aka Backend Framework 🤖
+### [aka.codesandbox] (How To Use JSON Web Tokens) for Aka Backend Framework 🤖
 
 Developed for [aka.backend](https://github.com/Aka-The-Archivist/aka.backend), to learn more about Aka Backend, take a
 look at the following resources:
