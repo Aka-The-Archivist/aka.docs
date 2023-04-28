@@ -147,7 +147,7 @@ functions even further.
 
 ```js
 export default (req, res, next) => {
-    // console.log(`${req.method} ${req.url}`);
+    // console.log(`${req.method} ${req.originalUrl}`);
     next();
 }
 ```

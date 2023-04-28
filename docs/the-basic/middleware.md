@@ -18,7 +18,7 @@ Here's an example of a simple middleware function that logs the HTTP method and 
 
 ```js title=/middleware/example.js
 export default (req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
+    console.log(`${req.method} ${req.originalUrl}`);
     next();
 }
 ```
@@ -41,7 +41,7 @@ access to the route.
 
 ```js title=/middleware/example.js
 export default ['/example', (req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
+    console.log(`${req.method} ${req.originalUrl}`);
     next();
 }]
 ```
