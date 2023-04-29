@@ -23,7 +23,7 @@ streamline your development process and deliver high-quality APIs
 faster.
 :::
 
-## CodeSandbox repo
+## CodeSandbox repo [CRUD]
 
 CodeSandbox is an online development platform that allows you to create, edit, and collaborate on web application
 projects using popular web technologies such as React, Vue, Angular, and more. With CodeSandbox, you can quickly create
@@ -143,6 +143,32 @@ Datasource "db": MySQL database "prisma" at "localhost:3306"
 ✔ Generated Prisma Client (4.13.0 | library) to .\node_modules\@prisma\client in 49ms
 ```
 
+## Create Database connection
+
+Connection helper is a file that exports a global connection object to allow easy access to a database from
+anywhere in your application. With the connection helper, you can easily create, modify, and delete documents in your
+database, and also perform more complex queries using the query language.
+
+```js title=/helpers/database.js
+import {PrismaClient} from "@prisma/client"
+
+const env = process.env.NODE_ENV || 'development';
+
+export let prisma = global.prisma || new PrismaClient(env !== '' ? {
+  log: [
+    'query',
+    // 'info',
+    'warn',
+    'error'
+  ],
+} : {})
+
+if (env !== 'production') global.prisma = prisma
+```
+
+The helper simplifies the setup for your database and reduces boilerplate code in your application, allowing you to
+focus on your core functionality.
+
 ## Create your first user
 
 If you want to create a user in your application, you can start by creating a new file in the routes/users
@@ -249,6 +275,4 @@ in the stack, or to the endpoint handler if no other middleware functions are de
 
 ## Introspection
 
-Introspect your database with Prisma: *
-*[Introspect](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-node-mysql)
-**
+Introspect your database with Prisma: **[Introspect](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-node-mysql)**
