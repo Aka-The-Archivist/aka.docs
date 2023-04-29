@@ -9,9 +9,16 @@ applications. But you are free to organize your application however you like.
 
 ## The Root Directory
 
-Structure of your project:
-
-![Docs Version Dropdown](./img/structure-024219.png)
+<iframe
+src="https://codesandbox.io/embed/github/Aka-The-Archivist/aka.backend?module=/main.js&autoresize=1&moduleview=1&hidenavigation=1&editorsize=65&expanddevtools=1&theme=dark&view=editor&previewwindow=console"
+style={{
+width: "100%",
+height: "500px",
+border: "0",
+borderRadius: "8px",
+overflow: "hidden"
+}}
+/>
 
 ## /config
 
@@ -336,7 +343,7 @@ file is used to exclude temporary files, log files, local configuration files, a
 necessary for the operation of the project and that may change frequently during development. This way, you can keep
 your Git repository clean and organized.
 
-## /index.js
+## /main.js
 
 ```js
 import {app} from "aka.providers"; // must init before all

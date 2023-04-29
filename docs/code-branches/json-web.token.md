@@ -10,6 +10,23 @@ to authorize access to protected routes.
 This section includes examples of how to implement JWT-based authentication and authorization in Aka Backend, including
 generating and verifying tokens, and protecting routes using middleware.
 
+## CodeSandbox repo
+
+CodeSandbox is an online development platform that allows you to create, edit, and collaborate on web application
+projects using popular web technologies such as React, Vue, Angular, and more. With CodeSandbox, you can quickly create
+sandbox environments where you can experiment with code, test your ideas, and share your work with others.
+
+<iframe
+src="https://codesandbox.io/embed/github/Aka-The-Archivist/aka.backend/jsonwebtoken?module=/main.js&autoresize=1&moduleview=1&hidenavigation=1&editorsize=65&expanddevtools=1&theme=dark&view=split&previewwindow=console"
+style={{
+width: "100%",
+height: "500px",
+border: "0",
+borderRadius: "8px",
+overflow: "hidden"
+}}
+/>
+
 ## Install jsonwebtoken npm
 
 ```bash
@@ -39,28 +56,28 @@ import jwt from "jsonwebtoken";
 // auth user path only middleware
 export default ["/user", (req, res, next) => {
 
-  // middleware function for authentication
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+    // middleware function for authentication
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
-  // abort if not authenticate
-  if (token == null)
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
-
-  // use jsonwebtoken in {req}
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
     // abort if not authenticate
-    if (err !== null)
-      return res.status(422).json({
-        message: "Unauthorized",
-      });
+    if (token == null)
+        return res.status(401).json({
+            message: "Unauthorized",
+        });
 
-    req.user = user;
+    // use jsonwebtoken in {req}
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+        // abort if not authenticate
+        if (err !== null)
+            return res.status(422).json({
+                message: "Unauthorized",
+            });
 
-    next() // return request ok
-  });
+        req.user = user;
+
+        next() // return request ok
+    });
 
 }];
 ```
@@ -121,9 +138,9 @@ This can be sent back from a request to logged user:
  * @param res
  */
 export default function get(req, res) {
-  res.json({
-    method: 'GET',
-    user: req.user,
-  })
+    res.json({
+        method: 'GET',
+        user: req.user,
+    })
 }
 ```

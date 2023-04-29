@@ -45,3 +45,14 @@ export default ['/example', (req, res, next) => {
     next();
 }]
 ```
+## Example :params middleware
+
+In this example we see how to add a middleware exclusively to a specific route. You can also use a wildcard to control
+access to the route.
+
+```js title=/middleware/example.js
+export default ['/example/:id', (req, res, next) => {
+    console.log(`${req.method} ${req.originalUrl}`);
+    next();
+}]
+```
