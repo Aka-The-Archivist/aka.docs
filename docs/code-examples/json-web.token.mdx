@@ -16,15 +16,20 @@ CodeSandbox is an online development platform that allows you to create, edit, a
 projects using popular web technologies such as React, Vue, Angular, and more. With CodeSandbox, you can quickly create
 sandbox environments where you can experiment with code, test your ideas, and share your work with others.
 
+import {iFrameSendBox} from '@site/src/helpers/functions';
+
 <iframe
-src="https://codesandbox.io/embed/github/Aka-The-Archivist/aka.backend/jsonwebtoken?module=/main.js&autoresize=1&moduleview=1&hidenavigation=1&editorsize=65&expanddevtools=1&theme=dark&view=split&previewwindow=console"
-style={{
-width: "100%",
-height: "500px",
-border: "0",
-borderRadius: "8px",
-overflow: "hidden"
-}}
+    src={iFrameSendBox('jsonwebtoken', [
+        '/routes/auth/index.js',
+        '/routes/users/index.js',
+    ])}
+    style={{
+        width: "100%",
+        height: "500px",
+        border: "0",
+        borderRadius: "8px",
+        overflow: "hidden"
+    }}
 />
 
 ## Install jsonwebtoken npm
@@ -89,9 +94,9 @@ The middleware is a function that takes parameters of (req, res, next).
 
 - The req is the sent request (GET, POST, DELETE, PUT, etc.).
 - The res is the response that can be sent back to the user in a multitude of ways (res.sendStatus(200), res.json(),
-  etc.).
+etc.).
 - The next is a function that can be called to move the execution past the piece of middleware and into the actual
-  app.get server response.
+app.get server response.
 
 > An example request using this middleware function would resemble something like this:
 

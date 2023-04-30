@@ -26,7 +26,17 @@ npx aka-create@latest
 You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code
 editor.
 
-The command also installs all necessary dependencies you need to run [aka.backend].
+The command also choice template app and installs all necessary dependencies you need to run [aka.backend].
+
+```bash
+PS C:\> npm init aka-create@latest
+√ What is your aka.backend project named? ... aka.backend.app
+? What template do you want to download? » - Use arrow-keys. Return to submit.
+    main
+>   jsonwebtoken - JWT are used for secure transmission
+    prismajs
+    mongodb
+```
 
 ## Start your site
 

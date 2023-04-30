@@ -26,15 +26,22 @@ CodeSandbox is an online development platform that allows you to create, edit, a
 projects using popular web technologies such as React, Vue, Angular, and more. With CodeSandbox, you can quickly create
 sandbox environments where you can experiment with code, test your ideas, and share your work with others.
 
+import {iFrameSendBox} from '@site/src/helpers/functions';
+
 <iframe
-src="https://codesandbox.io/embed/github/Aka-The-Archivist/aka.backend/mongodb?module=/main.js&autoresize=1&moduleview=1&hidenavigation=1&editorsize=65&expanddevtools=1&theme=dark&view=split&previewwindow=console"
-style={{
-width: "100%",
-height: "500px",
-border: "0",
-borderRadius: "8px",
-overflow: "hidden"
-}}
+    src={iFrameSendBox('mongodb', [
+        '/routes/users/create.js',
+        '/routes/users/[id]/index.js',
+        '/routes/users/[id]/update.js',
+        '/routes/users/[id]/delete.js',
+    ])}
+    style={{
+        width: "100%",
+        height: "500px",
+        border: "0",
+        borderRadius: "8px",
+        overflow: "hidden"
+    }}
 />
 
 ## Setting Up the Project
