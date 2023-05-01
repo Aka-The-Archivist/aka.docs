@@ -8,8 +8,9 @@ Let's discover **[aka.backend] in less than 5 minutes**. Get started by **creati
 
 ### What you'll need
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-    - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- [Node.js](https://nodejs.org/en/download/) version **18.16.0** or above:
+  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- [git-scm](https://git-scm.com/) version **2.33.0** or above.
 
 ## Generate a new project
 

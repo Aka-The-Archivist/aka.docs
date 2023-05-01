@@ -18,9 +18,7 @@ We know that developers need speed and performance, which is why aka backend is 
 Just a small command, to get you started on something magnificent!
 
 ```bash
-npx aka.create
-# or
-yarn aka.create
+npx aka-create@latest
 ```
 :::
 
