@@ -2,6 +2,7 @@ import './index.css';
 
 import useSWR from "swr";
 import React, {useEffect, useState} from 'react'
+import { Dialog, Disclosure } from '@headlessui/react'
 
 import {
     ArrowPathIcon,
@@ -9,75 +10,13 @@ import {
     CloudArrowUpIcon,
     Cog6ToothIcon,
     FingerPrintIcon,
-    LockClosedIcon,
+    LockClosedIcon, MinusSmallIcon, PlusSmallIcon,
     ServerIcon,
 } from '@heroicons/react/20/solid'
 
-import {BoltIcon, CalendarDaysIcon, UsersIcon} from '@heroicons/react/24/outline'
 import {fetcher} from "../helpers/functions";
 import Link from '@docusaurus/Link';
 
-const primaryFeatures = [
-    {
-        name: 'Server monitoring',
-        description:
-            'Non quo aperiam repellendus quas est est. Eos aut dolore aut ut sit nesciunt. Ex tempora quia. Sit nobis consequatur dolores incidunt.',
-        href: '#',
-        icon: BoltIcon,
-    },
-    {
-        name: 'Collaborate',
-        description:
-            'Vero eum voluptatem aliquid nostrum voluptatem. Vitae esse natus. Earum nihil deserunt eos quasi cupiditate. A inventore et molestiae natus.',
-        href: '#',
-        icon: UsersIcon,
-    },
-    {
-        name: 'Task scheduling',
-        description:
-            'Et quod quaerat dolorem quaerat architecto aliquam accusantium. Ex adipisci et doloremque autem quia quam. Quis eos molestiae at iure impedit.',
-        href: '#',
-        icon: CalendarDaysIcon,
-    },
-]
-const secondaryFeatures = [
-    {
-        name: 'Push to deploy.',
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-        icon: CloudArrowUpIcon,
-    },
-    {
-        name: 'SSL certificates.',
-        description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-        icon: LockClosedIcon,
-    },
-    {
-        name: 'Simple queues.',
-        description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
-        icon: ArrowPathIcon,
-    },
-    {
-        name: 'Advanced security.',
-        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-        icon: FingerPrintIcon,
-    },
-    {
-        name: 'Powerful API.',
-        description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-        icon: Cog6ToothIcon,
-    },
-    {
-        name: 'Database backups.',
-        description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. ',
-        icon: ServerIcon,
-    },
-]
-const stats = [
-    {id: 1, name: 'Developers on the platform', value: '8,000+'},
-    {id: 2, name: 'Daily requests', value: '900m+'},
-    {id: 3, name: 'Uptime guarantee', value: '99.9%'},
-    {id: 4, name: 'Projects deployed', value: '12m'},
-]
 const footerNavigation = {
     solutions: [
         {name: 'Hosting', href: '#'},
@@ -168,6 +107,15 @@ const footerNavigation = {
         },
     ],
 }
+
+const faqs = [
+    {
+        question: "What's the best thing about Switzerland?",
+        answer:
+            "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    },
+    // More questions...
+]
 
 export default function Home() {
     const [version, setVersion] = useState('1.0.0');
@@ -275,6 +223,38 @@ export default function Home() {
 
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* FAQ section */}
+            <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
+                <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
+                    <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
+                    <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
+                        {faqs.map((faq) => (
+                            <Disclosure as="div" key={faq.question} className="pt-6">
+                                {({ open }) => (
+                                    <>
+                                        <dt>
+                                            <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                                                <span className="text-base font-semibold leading-7">{faq.question}</span>
+                                                <span className="ml-6 flex h-7 items-center">
+                                                {open ? (
+                                                    <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                                ) : (
+                                                    <PlusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                                )}
+                                              </span>
+                                            </Disclosure.Button>
+                                        </dt>
+                                        <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                                            <p className="text-base leading-7 text-gray-600">{faq.answer}</p>
+                                        </Disclosure.Panel>
+                                    </>
+                                )}
+                            </Disclosure>
+                        ))}
+                    </dl>
                 </div>
             </div>
 
