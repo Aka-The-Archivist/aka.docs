@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkaka_docs=self.webpackChunkaka_docs||[]).push([[562],{2421:t=>{t.exports=JSON.parse('{"title":"Getting Started","slug":"/category/getting-started","permalink":"/aka.docs/docs/category/getting-started","navigation":{"next":{"title":"Installation","permalink":"/aka.docs/docs/getting-started/installation"}}}')}}]);
