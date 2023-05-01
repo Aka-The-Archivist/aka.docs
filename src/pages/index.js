@@ -2,7 +2,8 @@ import './index.css';
 
 import useSWR from "swr";
 import React, {useEffect, useState} from 'react'
-import { Dialog, Disclosure } from '@headlessui/react'
+import {Dialog, Disclosure} from '@headlessui/react'
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import {
     ArrowPathIcon,
@@ -129,6 +130,7 @@ export default function Home() {
 
     return (
         <div className="h-screen bg-gray-900">
+
             {/* Hero section */}
             <div className="relative isolate overflow-hidden">
                 <svg
@@ -174,7 +176,7 @@ export default function Home() {
                     <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
                         <img
                             className="h-11"
-                            src="/img/logo.svg"
+                            src={useBaseUrl('/img/logo.svg')}
                             alt="Aka backend logo"
                         />
                         <div className="mt-24 sm:mt-32 lg:mt-16">
@@ -216,8 +218,8 @@ export default function Home() {
 
                             <video autoPlay={true} loop={true} muted
                                    className="w-[80rem] h-[45rem] object-center rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10">
-                                <source src="/video/aka-create-latest.min.mp4" type="video/mp4"/>
-                                <source src="/video/aka-create-latest.min.webm" type="video/webm"/>
+                                <source src={useBaseUrl("/video/aka-create-latest.min.mp4")} type="video/mp4"/>
+                                <source src={useBaseUrl("/video/aka-create-latest.min.webm")} type="video/webm"/>
                                 Il tuo browser non supporta il tag video.
                             </video>
 
@@ -226,42 +228,10 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* FAQ section */}
-            <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
-                <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
-                    <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">Frequently asked questions</h2>
-                    <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
-                        {faqs.map((faq) => (
-                            <Disclosure as="div" key={faq.question} className="pt-6">
-                                {({ open }) => (
-                                    <>
-                                        <dt>
-                                            <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-                                                <span className="text-base font-semibold leading-7">{faq.question}</span>
-                                                <span className="ml-6 flex h-7 items-center">
-                                                {open ? (
-                                                    <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
-                                                ) : (
-                                                    <PlusSmallIcon className="h-6 w-6" aria-hidden="true" />
-                                                )}
-                                              </span>
-                                            </Disclosure.Button>
-                                        </dt>
-                                        <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                                            <p className="text-base leading-7 text-gray-600">{faq.answer}</p>
-                                        </Disclosure.Panel>
-                                    </>
-                                )}
-                            </Disclosure>
-                        ))}
-                    </dl>
-                </div>
-            </div>
-
             {/* Footer */}
             <footer aria-labelledby="footer-heading" className="relative">
                 <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
-                    <div className="border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
+                    <div className="border-t pt-8 md:flex md:items-center md:justify-between">
                         <div className="flex space-x-6 md:order-2">
                             {footerNavigation.social.map((item) => (
                                 <a key={item.name} href={item.href} className="text-gray-500 hover:text-gray-400">
