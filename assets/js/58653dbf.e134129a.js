@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkaka_docs=self.webpackChunkaka_docs||[]).push([[413],{8167:a=>{a.exports=JSON.parse('{"label":"released","permalink":"/aka.docs/blog/tags/released","allTagsPath":"/aka.docs/blog/tags","count":2}')}}]);

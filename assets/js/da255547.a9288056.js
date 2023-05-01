@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkaka_docs=self.webpackChunkaka_docs||[]).push([[329],{4426:a=>{a.exports=JSON.parse('{"permalink":"/aka.docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

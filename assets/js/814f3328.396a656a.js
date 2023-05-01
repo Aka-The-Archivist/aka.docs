@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkaka_docs=self.webpackChunkaka_docs||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Packages released","permalink":"/aka.docs/blog/packages-released"},{"title":"Backend released","permalink":"/aka.docs/blog/backend-released"}]}')}}]);
