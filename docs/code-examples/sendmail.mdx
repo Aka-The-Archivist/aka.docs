@@ -1,0 +1,216 @@
+---
+sidebar_position: 4
+---
+
+# Email System
+
+**[aka.emails]** is a powerful npm package that integrates the functionalities of popular mailing libraries such as Node Mailer
+and SendGrid, enhancing them with a **Handlebars (.hbs)** templating system. This module is part of the Aka Backend framework,
+but can also be used independently to provide a robust and flexible email sending solution.
+
+By integrating with Node Mailer and SendGrid, aka.emails brings the best of both worlds into a single, easy-to-use interface.
+Whether you need to send a few emails or thousands, whether it's a simple text message or a complex HTML layout, **aka.emails** has you covered.
+
+The integration with Handlebars adds an additional layer of power and flexibility. Handlebars is a popular templating engine
+that allows you to create dynamic content easily. With aka.emails, you can define your email templates in .hbs files,
+which can then be filled with data at runtime. This makes it extremely easy to create personalized emails for each recipient.
+
+### Here are some key features of aka.emails:
+
+:::info
+- **Integration with Node Mailer and SendGrid**: Leverage the power and flexibility of these popular mailing libraries directly from your Aka Backend application.
+
+- **Handlebars templating**: Create dynamic, personalized emails with ease using .hbs templates.
+
+- **Flexibility**: aka.emails can be used as a standalone package or as part of the Aka Backend framework, depending on your needs.
+
+- **Ease of use**: Despite its power, aka.emails maintains a simple and intuitive interface that makes it easy to send emails, even for developers who are new to Node.js or backend development.
+:::
+
+In the following sections of this documentation, we will explore in detail how to install and use aka.emails, including
+examples of sending both text and HTML emails, creating and using .hbs templates, and more. Whether you're an experienced
+developer or just getting started, we're confident that aka.emails can make your email-sending tasks easier and more efficient.
+
+## CodeSandbox repo [CRUD]
+
+CodeSandbox is an online development platform that allows you to create, edit, and collaborate on web application
+projects using popular web technologies such as React, Vue, Angular, and more. With CodeSandbox, you can quickly create
+sandbox environments where you can experiment with code, test your ideas, and share your work with others.
+
+import {iFrameSendBox} from '@site/src/helpers/functions';
+
+<iframe
+    src={iFrameSendBox('emails', [
+        '/routes/email/node.js',
+        '/routes/email/sendgrid.js',
+        '/emails/example.code.hbs',
+    ])}
+    style={{
+        width: "100%",
+        height: "500px",
+        border: "0",
+        borderRadius: "8px",
+        overflow: "hidden"
+    }}
+/>
+
+## Setting Up the Project
+
+Run the following command in your shell to install the driver in your project directory:
+
+```bash
+npm install aka.emails@latest
+
+```
+
+This command performs the following actions:
+
+- Downloads the aka.emails package and the dependencies it requires
+- Saves the package in the node_modules directory
+
+Records the dependency information in the package.json file
+
+## Create HTML email
+
+In this example, we will create a Handlebars (.hbs) template for sending a confirmation code email.
+The aka.emails module uses these templates to generate dynamic, personalized emails.
+
+* **Create the /emails Directory**
+
+The first step is to create a directory in your project root named /emails. This is where we'll store our .hbs templates.
+
+* **Create the Handlebars Template**
+
+Next, create a new file in the /emails directory named confirmation.hbs. This file will contain the HTML and Handlebars code for our email template.
+
+```handlebars title=/emails/example.code.hbs
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="supported-color-schemes" content="light">
+    <meta name="color-scheme" content="light">
+    <title>New Awesome Email</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .inner-body {
+                width: 100% !important;
+            }
+
+            .footer {
+                width: 100% !important;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .button {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; background-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: 0; padding: 0; width: 100% !important;">
+<div style="background-color: #ffffff;">
+    <div style="padding: 20px 0; margin: 0 auto; max-width: 600px;">
+        <table style="margin: 30px auto 0; font-size: 16px; max-width: 450px;">
+            <tbody>
+            <tr>
+                <td style="color: #1a1a1a; line-height: 22px;">
+                    <p style="margin-top: 20px;">
+                        Below is the confirmation code to access on <b>Aka The Archivist</b>.
+                    </p>
+                    <p style="margin-top: 20px;">
+                      <span style="font-size: 16px;">
+                          <b>[{{code}}]</b>
+                      </span>
+                    </p>
+                    <i style="margin-top: 20px;">
+                        If you have not made this request, you can safely ignore this message.
+                    </i>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="margin: 30px auto; border-top: 1px dashed #dadada; width: 450px;">
+            <tbody>
+            <tr>
+                <td style="color: rgba(26, 26, 26, 0.6); padding-top: 15px;">
+                    <p style="font-size: 12px; text-align: left;">
+                        Copyright 2023 | <b>Aka The Archivist</b>
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+```
+
+### Nodemailer Driver
+
+Now that our template is ready, we can use it to send an email. Here's how you can do this with the aka.emails module:
+
+```js title=/routes/email/node.js
+import {NodeMailer} from "aka.emails";
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+export default async function post(req, res) {
+
+        // create mail instance
+        const mail = new NodeMailer('test@example.com');
+
+        // set sendgrid from address
+        mail.from('no-reply@example.com')
+
+        // set subject mail
+        mail.subject(`🔐 Confirm code to continue authentication`);
+
+        // send async or await email with template
+        await mail.send('example.code', {code:3344585}).then((message) =>
+            console.log(message)
+        );
+
+}
+```
+
+### SendGrid Driver
+
+Now that our template is ready, we can use it to send an email. Here's how you can do this with the aka.emails module:
+
+```js title=/routes/email/sendgrid.js
+import {SendGridMail} from "aka.emails";
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+export default async function post(req, res) {
+
+        // create mail instance
+        const mail = new SendGridMail('test@example.com');
+
+        // set sendgrid api key
+        mail.setApiKey('SENDGRID_API_KEY')
+
+        // set sendgrid from address
+        mail.from('no-reply@example.com')
+
+        // set subject mail
+        mail.subject(`🔐 Confirm code to continue authentication`);
+
+        // send async or await email with template
+        await mail.send('example.code', {code:3344585}).then((message) =>
+            console.log(message)
+        );
+
+}
+```
